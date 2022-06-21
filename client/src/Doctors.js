@@ -4,75 +4,57 @@ import {
     List,
     Datagrid,
     TextField,
-    SimpleList,
-    ReferenceField,
     EditButton,
+    SelectInput,
     Edit,
     Create,
     SimpleForm,
-    ReferenceInput,
-    SelectInput,
     TextInput,
     useRecordContext,
+    ReferenceInput,
+    AutocompleteInput,
 } from 'react-admin';
 
-export const PostList = () => {
-    const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
+export const DoctorList = (props) => {
     return (
-        <List>
-            {isSmall ? (
-                <SimpleList
-                    primaryText={record => record.title}
-                    secondaryText={record => (
-                        <ReferenceField label="User" source="userId" reference="users">
-                            <TextField source="name" />
-                        </ReferenceField>
-                    )}
-                />
-            ) : (
-                <Datagrid>
-                    <TextField source="id" />
-                    <ReferenceField source="userId" reference="users">
-                        <TextField source="name" />
-                    </ReferenceField>
-                    <TextField source="title" />
-                    <EditButton />
-                </Datagrid>
-            )}
-    </List>
+        <List filters={DoctorFilters} {...props}>
+            <Datagrid>
+                <TextField source="id" />
+                <TextField source="name" />
+                <TextField source="dessignation" />
+                <TextField source="status" />
+                <EditButton basePath={"/doctors/"} />
+            </Datagrid>
+        </List>
     )
 }
 
-const PostTitle = () => {
+const DoctorTitle = () => {
     const record = useRecordContext();
     return <span>Post {record ? `"${record.title}"` : ''}</span>;
 }
-export const PostEdit = () => (
-    <Edit title={<PostTitle />}>
+export const DoctorEdit = (props) => (
+    <Edit  {...props}>
         <SimpleForm>
-            <TextInput disabled source="id" />
-            <ReferenceInput source="userId" reference="users">
-                <SelectInput optionText="name" />
-            </ReferenceInput>
-            <TextInput source="title" />
-            <TextInput multiline source="body" />
+            <TextField disabled source="id" />
+            <TextInput source="name" />
+            <TextInput source="dessignation" />
+            <TextInput source="status" />
         </SimpleForm>
     </Edit>
 );
-export const PostCreate = props => (
+export const DoctorCreate = props => (
     <Create {...props}>
         <SimpleForm>
-            <ReferenceInput source="userId" reference="users">
-                <SelectInput optionText="name" />
-            </ReferenceInput>
-            <TextInput source="title" />
-            <TextInput multiline source="body" />
+            <TextInput source="name" />
+            <TextInput source="dessignation" />
+            <TextInput source="status" />
         </SimpleForm>
     </Create>
 );
-const postFilters = [
-    // <TextInput source="q" label="Search" alwaysOn />,
-    <ReferenceInput source="userId" label="User" reference="users" alwaysOn>
-        <SelectInput optionText="name" />
+const DoctorFilters = [
+    <TextInput source="q" label="Search Doctors" alwaysOn />,
+    <ReferenceInput source="doctorAssigined" label="name" reference="doctors" >
+        <AutocompleteInput optionText="name" />
     </ReferenceInput>,
 ];
