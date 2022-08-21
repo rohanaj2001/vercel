@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { useMediaQuery } from '@mui/material';
 import {
     List,
@@ -6,10 +7,13 @@ import {
     TextField,
     EditButton,
     SelectInput,
+    DateTimeInput,
     Edit,
     Create,
     SimpleForm,
     TextInput,
+    NumberInput,
+    RadioButtonGroupInput,
     useRecordContext,
     ReferenceInput,
     AutocompleteInput,
@@ -20,9 +24,12 @@ export const DoctorList = (props) => {
         <List filters={DoctorFilters} {...props}>
             <Datagrid>
                 <TextField source="id" />
+                <TextField label="Medical Registration Number" source="MR No" />
                 <TextField source="name" />
-                <TextField source="dessignation" />
-                <TextField source="status" />
+                <TextField source="designation" />
+                <TextField source="age" />
+                <TextField source="sex" />
+                <TextField source="free From" />
                 <EditButton basePath={"/doctors/"} />
             </Datagrid>
         </List>
@@ -36,19 +43,38 @@ const DoctorTitle = () => {
 export const DoctorEdit = (props) => (
     <Edit  {...props}>
         <SimpleForm>
-            <TextField disabled source="id" />
-            <TextInput source="name" />
-            <TextInput source="dessignation" />
-            <TextInput source="status" />
+        <TextInput source="name" />
+            <NumberInput source="age" max={125} min={0} />
+            <RadioButtonGroupInput source="sex" choices={[
+    { id: 'Male', name: 'Male' },
+    { id: 'Female', name: 'Female' },
+    { id: 'Others', name: 'Others' },
+]} />
+            <TextInput source="mobile" />
+            <TextInput label="Email Address" source="email" type="email" />
+            <TextInput label="Medical Registration Number" source="MR No" placeholder="KMC658399"/>
+            <TextInput source="designation" />
+            <DateTimeInput source="free From" />
+            <DateTimeInput source="free Till" />
         </SimpleForm>
     </Edit>
 );
 export const DoctorCreate = props => (
     <Create {...props}>
-        <SimpleForm>
-            <TextInput source="name" />
-            <TextInput source="dessignation" />
-            <TextInput source="status" />
+         <SimpleForm>
+        <TextInput source="name" />
+            <NumberInput source="age" max={125} min={0} />
+            <RadioButtonGroupInput source="sex" choices={[
+    { id: 'Male', name: 'Male' },
+    { id: 'Female', name: 'Female' },
+    { id: 'Others', name: 'Others' },
+]} />
+            <TextInput source="mobile" />
+            <TextInput label="Email Address" source="email" type="email" />
+            <TextInput label="Medical Registration Number" source="MR No" placeholder="KMC658399"/>
+            <TextInput source="designation" />
+            <DateTimeInput source="free From" />
+            <DateTimeInput source="free Till" />
         </SimpleForm>
     </Create>
 );
