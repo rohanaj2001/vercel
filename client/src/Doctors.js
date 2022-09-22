@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { useMediaQuery } from '@mui/material';
 import {
     List,
@@ -17,19 +16,22 @@ import {
     useRecordContext,
     ReferenceInput,
     AutocompleteInput,
+    TimeInput,
+    DateField,
 } from 'react-admin';
 
 export const DoctorList = (props) => {
     return (
         <List filters={DoctorFilters} {...props}>
             <Datagrid>
-                <TextField source="id" />
-                <TextField label="Medical Registration Number" source="MR No" />
+                {/* <TextField source="_id" /> */}
+                <TextField label="MR Number" source="MR_no" />
                 <TextField source="name" />
                 <TextField source="designation" />
-                <TextField source="age" />
-                <TextField source="sex" />
-                <TextField source="free From" />
+                <TextField source="phone" />
+                <TextField source="email" />
+                <DateField  source="free_from" showTime={true} showDate={false}/>
+                <DateField  source="free_till" showTime={true} showDate={false}/>
                 <EditButton basePath={"/doctors/"} />
             </Datagrid>
         </List>
@@ -38,24 +40,25 @@ export const DoctorList = (props) => {
 
 const DoctorTitle = () => {
     const record = useRecordContext();
-    return <span>Post {record ? `"${record.title}"` : ''}</span>;
+    return <span>Doctor {record ? `"${record.title}"` : ''}</span>;
 }
 export const DoctorEdit = (props) => (
     <Edit  {...props}>
         <SimpleForm>
         <TextInput source="name" />
+        <TextInput source="doctor_id" label="Doctor Id"/>
             <NumberInput source="age" max={125} min={0} />
-            <RadioButtonGroupInput source="sex" choices={[
-    { id: 'Male', name: 'Male' },
-    { id: 'Female', name: 'Female' },
+            <RadioButtonGroupInput source="gender" choices={[
+    { id: 'm', name: 'Male' },
+    { id: 'f', name: 'Female' },
     { id: 'Others', name: 'Others' },
 ]} />
-            <TextInput source="mobile" />
+            <TextInput source="phone" />
             <TextInput label="Email Address" source="email" type="email" />
-            <TextInput label="Medical Registration Number" source="MR No" placeholder="KMC658399"/>
+            <TextInput label="Medical Registration Number" source="MR_no" placeholder="KMC658399"/>
             <TextInput source="designation" />
-            <DateTimeInput source="free From" />
-            <DateTimeInput source="free Till" />
+            <TimeInput source="free_from" />
+            <TimeInput source="free_till" />
         </SimpleForm>
     </Edit>
 );
@@ -63,24 +66,25 @@ export const DoctorCreate = props => (
     <Create {...props}>
          <SimpleForm>
         <TextInput source="name" />
+        <TextInput source="doctor_id" label="Doctor Id" />
             <NumberInput source="age" max={125} min={0} />
-            <RadioButtonGroupInput source="sex" choices={[
-    { id: 'Male', name: 'Male' },
-    { id: 'Female', name: 'Female' },
+            <RadioButtonGroupInput source="gender" choices={[
+    { id: 'm', name: 'Male' },
+    { id: 'f', name: 'Female' },
     { id: 'Others', name: 'Others' },
 ]} />
-            <TextInput source="mobile" />
+            <TextInput source="phone" />
             <TextInput label="Email Address" source="email" type="email" />
-            <TextInput label="Medical Registration Number" source="MR No" placeholder="KMC658399"/>
+            <TextInput label="Medical Registration Number" source="MR_no" placeholder="KMC658399"/>
             <TextInput source="designation" />
-            <DateTimeInput source="free From" />
-            <DateTimeInput source="free Till" />
+            <TimeInput  source="free_from" />
+            <TimeInput  source="free_till" />
         </SimpleForm>
     </Create>
 );
 const DoctorFilters = [
     <TextInput source="q" label="Search Doctors" alwaysOn />,
-    <ReferenceInput source="doctorAssigined" label="name" reference="doctors" >
+    <ReferenceInput source="name" label="Doctor's name" reference="doctors" >
         <AutocompleteInput optionText="name" />
     </ReferenceInput>,
 ];

@@ -12,25 +12,52 @@ import {PatientList, PatientCreate, PatientEdit} from './Patients';
 import {BlogList,BlogEdit, BlogCreate} from './Blogs';
 import simpleRestProvider from 'ra-data-simple-rest'
 import { browserHistory, Router, Route } from 'react-router';
+import { defaultTheme } from 'react-admin';
 
 
-let theme = createTheme({
+const theme = createTheme({
   palette: {
-    customPrimary: {
-      main: '#ff3402',
+    primary: {
+      // light: '#95C8EA',
+      main: 'rgba(11, 158, 95, 0.7);',
+      // dark: '#002884',
+      // contrastText: '#fff',
+    },
+    secondary: {
+      main: '#95C8EA',
+      // contrastText: '#000',
     },
   },
-});
+
+  typography: {
+      // Use the system font instead of the default Roboto font.
+      fontFamily: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Arial', 'sans-serif'].join(','),
+  },
+  components: {
+    RaDatagrid: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "#E4F1F9",
+            "& .RaDatagrid-headerCell": {
+                backgroundColor: "#95C8EA",
+            },
+          }
+       }
+    }
+}
+})
 
 // const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
 
 
 const App = () => (
 
-  <Admin dashboard={Dashboard} authProvider={authProvider} dataProvider={simpleRestProvider('http://localhost:3000')} >
-    <Resource name="Doctors" list={DoctorList} edit={DoctorEdit} create={DoctorCreate} icon={Doctor} />
-    <Resource name="Patients" list={PatientList}  edit={PatientEdit} create={PatientCreate} icon={Patient} />
-    <Resource name="Blogs"  list={BlogList} edit={BlogEdit} create={BlogCreate} icon={Blog} />
+  <Admin dashboard={Dashboard} authProvider={authProvider}  
+  theme={theme}
+  dataProvider={simpleRestProvider('http://localhost:3000')} >
+    <Resource name="doctors" list={DoctorList} edit={DoctorEdit} create={DoctorCreate} icon={Doctor} />
+    <Resource name="patients" list={PatientList}  edit={PatientEdit} create={PatientCreate} icon={Patient} />
+    <Resource name="blogs"  list={BlogList} edit={BlogEdit} create={BlogCreate} icon={Blog} />
 
     {/* <CustomRoutes noLayout>
       <Route path="/doctors" element={<Doctors />} icon={Patient} />

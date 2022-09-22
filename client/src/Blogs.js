@@ -31,7 +31,7 @@ export const BlogList = (props) => {
             <Datagrid>
                 <TextField source="id" />
                 <TextField source="title" />
-                <TextField source="body" />
+                <TextField source="content" />
                 <ImageField label="Related Images" source="pictures.src"  />
                 <EditButton basePath={"/doctors/"} />
             </Datagrid>
@@ -48,7 +48,7 @@ export const BlogEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput source="title" validate={[required()]} fullWidth resettable />
-            <TextInput source="body" validate={[required()]} multiline fullWidth resettable />
+            <TextInput source="content" validate={[required()]} multiline fullWidth resettable />
             <ImageInput source="pictures" label="Related pictures" accept="image/*">
                 <ImageField source="src" title="title" />
             </ImageInput>
@@ -59,7 +59,7 @@ export const BlogCreate = props => (
     <Create {...props}>
         <SimpleForm>
             <TextInput source="title" validate={[required()]} fullWidth resettable />
-            <TextInput source="body" validate={[required()]} multiline fullWidth resettable />
+            <TextInput source="content" validate={[required()]} multiline fullWidth resettable />
             <ImageInput source="pictures" label="Related pictures" accept="image/*" >
                 <ImageField source="src" title="title" />
             </ImageInput>
@@ -67,8 +67,8 @@ export const BlogCreate = props => (
     </Create>
 );
 const BlogFilters = [
-    <TextInput source="q" label="Search Doctors" alwaysOn />,
-    <ReferenceInput source="doctorAssigined" label="name" reference="doctors" >
-        <AutocompleteInput optionText="name" />
+    <TextInput source="q" label="Search Blogs" alwaysOn />,
+    <ReferenceInput source="title" label="name" reference="blogs" >
+        <AutocompleteInput optionText="title" />
     </ReferenceInput>,
 ];

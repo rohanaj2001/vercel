@@ -18,8 +18,7 @@ function MyChart() {
       { type: 'linear', position: 'left' }
     ],
     []
-  )
- console.log("heyyyy");
+  ) 
 return(
   <>
   <div 
