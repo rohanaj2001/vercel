@@ -47,6 +47,7 @@ const BlogTitle = () => {
 export const BlogEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
+            <TextInput source="id" validate={[required()]}  />
             <TextInput source="title" validate={[required()]} fullWidth resettable />
             <TextInput source="content" validate={[required()]} multiline fullWidth resettable />
             <ImageInput source="pictures" label="Related pictures" accept="image/*">
@@ -58,6 +59,7 @@ export const BlogEdit = (props) => (
 export const BlogCreate = props => (
     <Create {...props}>
         <SimpleForm>
+            <TextInput source="id" validate={[required()]}  />
             <TextInput source="title" validate={[required()]} fullWidth resettable />
             <TextInput source="content" validate={[required()]} multiline fullWidth resettable />
             <ImageInput source="pictures" label="Related pictures" accept="image/*" >
