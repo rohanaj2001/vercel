@@ -54,7 +54,7 @@ const App = () => (
 
   <Admin dashboard={Dashboard} authProvider={authProvider}  
   theme={theme}
-  dataProvider={simpleRestProvider('http://localhost:3000')} >
+  dataProvider={simpleRestProvider('http://103.76.248.116:3000/api/v1/admin')} >
     <Resource name="doctors" list={DoctorList} edit={DoctorEdit} create={DoctorCreate} icon={Doctor} />
     <Resource name="patients" list={PatientList}  edit={PatientEdit} create={PatientCreate} icon={Patient} />
     <Resource name="blogs"  list={BlogList} edit={BlogEdit} create={BlogCreate} icon={Blog} />

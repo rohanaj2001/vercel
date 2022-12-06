@@ -1,12 +1,13 @@
 {
   "name": "client",
-  "proxy": "http://localhost:5000/api/v1/admin/",
+  "proxy": "http://103.76.248.116:3000/api/v1/admin/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "caniuse-lite": "^1.0.30001436",
     "css-mediaquery": "^0.1.2",
     "prop-types": "^15.8.1",
     "ra-data-json-server": "^4.1.4",

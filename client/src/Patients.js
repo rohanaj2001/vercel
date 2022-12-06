@@ -30,7 +30,7 @@ export const PatientList = (props) => {
                 <TextField source="phone" label="Phone Number" />
                 <TextField source="email" />
                 <TextField source="patient_id" label="Patient ID" />
-                <TextField source="doctor_assigned" />
+                <TextField source="doctor_id" />
                 <DateField source="previous_appointment" />
                 <DateField source="next_appointment" />
                 <TextField source="age"/>
@@ -62,7 +62,7 @@ export const PatientEdit = (props) => (
             <span id="message"></span>
             <TextInput source="address" />
             <TextInput source="hospital_no" placeholder="abc00123456"/>
-            <ReferenceInput  source="doctor_assigned" reference="doctors" >
+            <ReferenceInput  source="doctor_id" reference="doctors" >
             {/* sort={{ field: 'id', order: 'ASC' }} */}
                 <SelectInput optionText="name" />
             </ReferenceInput>
@@ -87,7 +87,7 @@ export const PatientCreate = props => (
             <span id="message"></span>
             <TextInput source="address" />
             <TextInput source="hospital_no" placeholder="abc00123456"/>
-            <ReferenceInput  source="doctor_assigned" reference="doctors" >
+            <ReferenceInput  source="doctor_id" reference="doctors" >
             {/* sort={{ field: 'id', order: 'ASC' }} */}
                 <SelectInput optionText="name" />
             </ReferenceInput>
