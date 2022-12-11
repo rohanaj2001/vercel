@@ -13,6 +13,7 @@ import {PatientList, PatientCreate, PatientEdit} from './Patients';
 import {BlogList,BlogEdit, BlogCreate} from './Blogs';
 import simpleRestProvider from 'ra-data-simple-rest'
 import MyLoginPage from "./MyLoginPage";
+import { MyLayout } from "./MyLayout";
 
 const theme = createTheme({
   palette: {
@@ -51,28 +52,28 @@ const httpClient = (url, options = {}) => {
   if (!options.headers) {
       options.headers = new Headers({ Accept: 'application/json' });
   }
-  const { token } = JSON.parse(localStorage.getItem('auth'));
-  options.headers.set('Authorization', `Bearer ${token}`);
+  // const { token } = JSON.parse(localStorage.getItem('auth'));
+  // options.headers.set('Authorization', `Bearer ${token}`);
+  options.headers.set('Access-Control-Expose-Headers: Content-Encoding', 'X-Total-Count')
   return fetchUtils.fetchJson(url, options);
 };
 
 
-
 const dataProvider = simpleRestProvider('http://103.76.248.116:3000/api/v1/admin') 
+
 // add httpClient 👆
 const App = () => (
   
   <Admin dashboard={Dashboard} loginPage={MyLoginPage}  
   theme={theme}
-  dataProvider={dataProvider}
   authProvider={authProvider}
+  dataProvider={dataProvider}
   requireAuth
-   >
-    {/* requireAuth */}
-    {/* authProvider={authProvider}  */}
-    <Resource name="doctors" list={DoctorList} edit={DoctorEdit} create={DoctorCreate} icon={Doctor} />
-    <Resource name="patients" list={PatientList}  edit={PatientEdit} create={PatientCreate} icon={Patient} />
-    <Resource name="blogs"  list={BlogList} edit={BlogEdit} create={BlogCreate} icon={Blog} />
+  >
+     {/* add this field for logging querries layout={MyLayout} 👆 */}
+    <Resource name="doctors" list={DoctorList} edit={DoctorEdit} create={DoctorCreate} icon={Doctor} requireAuth/>
+    <Resource name="patients" list={PatientList}  edit={PatientEdit} create={PatientCreate} icon={Patient} requireAuth/>
+    <Resource name="blogs"  list={BlogList} edit={BlogEdit} create={BlogCreate} icon={Blog} requireAuth/>
 
   </Admin>
 );
