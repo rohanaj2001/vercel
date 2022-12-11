@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Admin, Resource, CustomRoutes, restProvider } from 'react-admin'
+import { Admin, Resource, fetchUtils, CustomRoutes, useAuthenticated, restProvider, defaultTheme } from 'react-admin'
+import { Route } from 'react-router-dom';
 import jsonServerProvider from 'ra-data-json-server';
 import Patient from '@mui/icons-material/PeopleAlt';
 import Doctor from '@mui/icons-material/MedicalServices';
@@ -11,9 +12,7 @@ import {DoctorList, DoctorEdit, DoctorCreate} from './Doctors';
 import {PatientList, PatientCreate, PatientEdit} from './Patients';
 import {BlogList,BlogEdit, BlogCreate} from './Blogs';
 import simpleRestProvider from 'ra-data-simple-rest'
-import { browserHistory, Router, Route } from 'react-router';
-import { defaultTheme } from 'react-admin';
-
+import MyLoginPage from "./MyLoginPage";
 
 const theme = createTheme({
   palette: {
@@ -47,26 +46,35 @@ const theme = createTheme({
 }
 })
 
-// const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+
+const httpClient = (url, options = {}) => {
+  if (!options.headers) {
+      options.headers = new Headers({ Accept: 'application/json' });
+  }
+  const { token } = JSON.parse(localStorage.getItem('auth'));
+  options.headers.set('Authorization', `Bearer ${token}`);
+  return fetchUtils.fetchJson(url, options);
+};
 
 
+
+const dataProvider = simpleRestProvider('http://103.76.248.116:3000/api/v1/admin') 
+// add httpClient 👆
 const App = () => (
-
-  <Admin dashboard={Dashboard} authProvider={authProvider}  
+  
+  <Admin dashboard={Dashboard} loginPage={MyLoginPage}  
   theme={theme}
-  dataProvider={simpleRestProvider('http://103.76.248.116:3000/api/v1/admin')} >
+  dataProvider={dataProvider}
+  authProvider={authProvider}
+  requireAuth
+   >
+    {/* requireAuth */}
+    {/* authProvider={authProvider}  */}
     <Resource name="doctors" list={DoctorList} edit={DoctorEdit} create={DoctorCreate} icon={Doctor} />
     <Resource name="patients" list={PatientList}  edit={PatientEdit} create={PatientCreate} icon={Patient} />
     <Resource name="blogs"  list={BlogList} edit={BlogEdit} create={BlogCreate} icon={Blog} />
 
-    {/* <CustomRoutes noLayout>
-      <Route path="/doctors" element={<Doctors />} icon={Patient} />
-    </CustomRoutes>
-    <CustomRoutes noLayout>
-      <Route path="/patients" element={<Patients />} icon={Patient} />
-    </CustomRoutes> */}
   </Admin>
-
 );
 
 export default App;
