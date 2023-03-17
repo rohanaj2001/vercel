@@ -71,7 +71,7 @@ const App = () => (
   dataProvider={dataProvider}
   requireAuth
   >
-     {/* add this field for logging querries layout={MyLayout} 👆 */}
+     {/* add this field for logging querries layout={MyLayout}  */}
     <Resource name="doctors" list={DoctorList} edit={DoctorEdit} create={DoctorCreate} icon={Doctor} requireAuth/>
     <Resource name="patients" list={PatientList}  edit={PatientEdit} create={PatientCreate} icon={Patient} requireAuth/>
     <Resource name="blogs"  list={BlogList} edit={BlogEdit} create={BlogCreate} icon={Blog} requireAuth/>
