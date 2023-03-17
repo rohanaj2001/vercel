@@ -1,6 +1,7 @@
+
 {
   "name": "client",
-  "proxy": "http://103.76.248.116:3000/api/v1/admin/",
+  "proxy": "http://103.76.248.116:5000/api/v1/admin/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

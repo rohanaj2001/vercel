@@ -8,7 +8,7 @@ const Dashboard = () => {
 return (
 <>
     <Card>
-        <CardHeader title="Welcome to the admin dashboard" />
+        <CardHeader title="Welcome to the Admin Dashboard" />
         <CardContent>You can add new patients and doctors, edit existing patient's/doctor's information.</CardContent>
     </Card>
     <MyChart />

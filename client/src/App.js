@@ -59,7 +59,8 @@ const httpClient = (url, options = {}) => {
 };
 
 
-const dataProvider = simpleRestProvider('http://103.76.248.116:3000/api/v1/admin') 
+const dataProvider = simpleRestProvider('http://103.76.248.116:5000/api/v1/admin') 
+// const dataProvider = simpleRestProvider('http://localhost:5000/api/v1/admin') 
 
 // add httpClient 👆
 const App = () => (
